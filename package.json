@@ -1,0 +1,18 @@
+{
+  "name": "py-ast-edit",
+  "main": "./lib/py-ast-edit",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "py-ast-edit:select-parent"
+  },
+  "repository": "https://github.com/atom/py-ast-edit",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

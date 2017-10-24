@@ -1,0 +1,5 @@
+{
+  "atom-workspace": {
+    "ctrl-alt-o": "py-ast-edit:toggle"
+  }
+}

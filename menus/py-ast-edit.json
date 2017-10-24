@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Toggle py-ast-edit",
+        "command": "py-ast-edit:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "py-ast-edit",
+          "submenu": [
+            {
+              "label": "Toggle",
+              "command": "py-ast-edit:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
