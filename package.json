@@ -8,7 +8,7 @@
   "activationCommands": {
     "atom-workspace": "py-ast-edit:select-parent"
   },
-  "repository": "https://github.com/atom/py-ast-edit",
+  "repository": "https://github.com/dwiel/py-ast-edit",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"

@@ -10,25 +10,27 @@ def position_python_to_atom(position):
     return (position[0] - 1, position[1])
 
 
-def node(tree, query_line_number, query_column_offset):
-    # todo: doesn't work if query is on empty line
+def nodes(tree, query_line_number, query_column_offset):
     # todo: doesn't work when query is in symbols
     query_line_number += 1
+
+    cursor_position = (query_line_number, query_column_offset)
 
     for node in ast.walk(tree):
         for child in ast.iter_child_nodes(node):
             child.parent = node
 
+    results = []
     last_node = None
     for node in ast.walk(tree):
-        line_number = getattr(node, 'lineno', None)
-        column_offset = getattr(node, 'col_offset', None)
+        first_token = getattr(node, 'first_token', None)
+        last_token = getattr(node, 'last_token', None)
+        if first_token and first_token.start <= cursor_position:
+            if last_token.end >= cursor_position:
+                # print node, node.first_token.start, node.last_token.end
+                results.append(node)
 
-        if line_number == query_line_number and \
-            (query_column_offset >= column_offset or last_node is None):
-            last_node = node
-
-    return last_node
+    return results
 
 
 def range_atom_to_python(range):
@@ -50,7 +52,7 @@ def select_parent(data, source):
     tokens = asttokens.ASTTokens(source, tree=tree)
     tokens.mark_tokens(tree)
 
-    last_node = node(tree, *cursor_position)
+    last_node = nodes(tree, *cursor_position)[-1]
 
     for _ in range(30):
         last_node = last_node.parent
@@ -85,7 +87,7 @@ def main():
     # TODO: go *
     # TODO: cell [prev|next] [arg|class|assign]
     # TODO: arg, class, function, import, print, assert, statement, comprehension, slice, index, attribute, if_expression, call, compare, if, for, while, break, loop, try, ...
-
+    # TODO: cell bro, cousin prev/next
 
 if __name__ == '__main__':
     main()
